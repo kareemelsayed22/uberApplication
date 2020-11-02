@@ -31,11 +31,26 @@ function update() {
 function destroy() {
 
 }
-function create() {
-  const newRide = new Ride(driverId);
+async function create() {
+  // async function recreateRideTable(){
+  //   const database = await Ride.sync({ force: true });
+  //   console.log("The table for the Ride model was just (re)created!");
+  //   return database
+  // }
+  // recreateRideTable().then(() => {
+  //     const kar123 = Ride.create({ driverId: "Kar123", passengerId: "1234" });
+  //     console.log('Kar123 was saved to the database!');
+  // })
 
-  return newRide;
+
+  const kar123 = Ride.create({ driverId: "Kar123", passengerId: "1234" });
+  console.log('Kar123 was saved to the database!');
+
+
+
 }
+
+create();
 
 module.exports = {
   index

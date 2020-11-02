@@ -31,11 +31,26 @@ function update() {
 function destroy() {
 
 }
-function create() {
-  const newPassenger = new Passenger(userId);
+async function create() {
+  async function recreatePassengerTable(){
+    const database = await Passenger.sync({ force: true });
+    console.log("The table for the Passenger model was just (re)created!");
+    return database
+  }
+  recreatePassengerTable().then(() => {
+    const firstPassenger = Passenger.create({ userId: "asd67", lattitude: "675" });
+    console.log('asd67 was saved to the database!');
+  })
 
-  return newPassenger;
+
+  // const firstPassenger = Passenger.create({ userId: "asd67", lattitude: "675" });
+  // console.log('asd67 was saved to the database!');
+
+
+
 }
+
+create();
 
 module.exports = {
   index

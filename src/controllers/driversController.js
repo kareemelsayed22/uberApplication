@@ -31,11 +31,26 @@ function update() {
 function destroy() {
 
 }
-function create() {
-  const newDriver = new Driver(userId);
+async function create() {
+  async function recreateDriverTable(){
+    const database = await Driver.sync({ force: true });
+    console.log("The table for the Driver model was just (re)created!");
+    return database
+  }
+  recreateDriverTable().then(() => {
+    const firstDriver = Driver.create({ userId: "ert23", lattitude: "6758" });
+    console.log('ert23 was saved to the database!');
+  })
 
-  return newDriver;
+
+  // const firstPassenger = Passenger.create({ userId: "asd67", lattitude: "675" });
+  // console.log('asd67 was saved to the database!');
+
+
+
 }
+
+create();
 
 module.exports = {
   index

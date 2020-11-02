@@ -31,11 +31,26 @@ function update() {
 function destroy() {
 
 }
-function create() {
-  const newReview = new Review(rideId);
+async function create() {
+  async function recreateReviewTable(){
+    const database = await Review.sync({ force: true });
+    console.log("The table for the Review model was just (re)created!");
+    return database
+  }
+  recreateReviewTable().then(() => {
+    const firstReview = Review.create({ rideId: "asdf1", comment: "very good" });
+    console.log('asdf1 was saved to the database!');
+  })
 
-  return newReview;
+
+  // const firstReview = Review.create({ rideId: "asdf1", comment: "very good" });
+  // console.log('asdf1 was saved to the database!');
+
+
+
 }
+
+create();
 
 module.exports = {
   index
