@@ -12,7 +12,7 @@ const Review = sequelize.define('Review', {
     type: DataTypes.STRING
     // allowNull defaults to true
   },
-  isPassenger: {
+  forPassenger: {
     type: DataTypes.STRING,
     //allowNull: false
   },

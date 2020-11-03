@@ -6,16 +6,12 @@ function update(){
 
 }
 
-function index(){
-  const usernames = ["Chris", "Cris", "Kareem", "Bob", "Mary", "John", "James", "Tom", "Mike", "Joe"];
+const index = async (user) => {
+    const users = await User.findAll();
+    console.log(users.every(user => user instanceof User)); // true
+    console.log("All users:", JSON.stringify(users, null, 2));
+    return users
 
- const newUsers = [];
-  for (let i = 0; i < 10; i++) {
-    const newUser = new User(usernames[i]);
-    newUsers.push(newUser);
-  }
-
-  return newUsers;
 }
 
 function show(username) {
@@ -31,25 +27,27 @@ function update() {
 function destroy() {
 
 }
-async function create() {
-  // async function recreateUserTable(){
-  //   const database = await User.sync({ force: true });
-  //   console.log("The table for the User model was just (re)created!");
-  //   return database
-  // }
-  // recreateUserTable().then(() => {
-  //     const kareem = User.create({ username: "Kareem", password: "abcd" });
-  //     console.log('Kareem was saved to the database!');
-  // })
-  const kareem = User.create({ username: "Kareem", password: "abcd" });
-  console.log('Kareem was saved to the database!');
-
-
-
+const create = (user) => {
+    const postUser = User.create({ password: user.password, username: user.username });
+    return postUser.then((postUser) => {
+        console.log('postUser', postUser)
+        return postUser
+    })
 
 }
+async function recreate() {
 
-create();
+  const database = await User.sync({ force: true });
+  console.log("The table for the User model was just (re)created!");
+  return database
+}
+// function syncAll(sequelize) {
+//   sequelize.sync({ force: true, match: /_test$/ });
+// }
+
+// recreate()
+
+
 module.exports = {
-  index
+  index, create, recreate
 }

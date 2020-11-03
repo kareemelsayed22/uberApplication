@@ -32,15 +32,15 @@ function destroy() {
 
 }
 async function create() {
-  async function recreateReviewTable(){
-    const database = await Review.sync({ force: true });
-    console.log("The table for the Review model was just (re)created!");
-    return database
-  }
-  recreateReviewTable().then(() => {
-    const firstReview = Review.create({ rideId: "asdf1", comment: "very good" });
-    console.log('asdf1 was saved to the database!');
-  })
+  // async function recreateReviewTable(){
+  //   const database = await Review.sync({ force: true });
+  //   console.log("The table for the Review model was just (re)created!");
+  //   return database
+  // }
+  // recreateReviewTable().then(() => {
+  //   const firstReview = Review.create({ rideId: "asdf1", comment: "very good" });
+  //   console.log('asdf1 was saved to the database!');
+  // })
 
 
   // const firstReview = Review.create({ rideId: "asdf1", comment: "very good" });
@@ -49,9 +49,15 @@ async function create() {
 
 
 }
+async function recreate() {
 
-create();
+  const database = await Review.sync({ force: true });
+  console.log("The table for the User model was just (re)created!");
+  return database
+}
+
+// recreate();
 
 module.exports = {
-  index
+  index, recreate
 }

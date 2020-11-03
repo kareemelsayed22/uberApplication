@@ -43,15 +43,21 @@ async function create() {
   // })
 
 
-  const kar123 = Ride.create({ driverId: "Kar123", passengerId: "1234" });
-  console.log('Kar123 was saved to the database!');
+  // const kar123 = Ride.create({ driverId: "Kar123", passengerId: "1234" });
+  // console.log('Kar123 was saved to the database!');
 
 
 
 }
+async function recreate() {
 
-create();
+  const database = await Ride.sync({ force: true });
+  console.log("The table for the User model was just (re)created!");
+  return database
+}
+
+// recreate();
 
 module.exports = {
-  index
+  index, recreate
 }

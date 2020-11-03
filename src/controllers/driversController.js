@@ -32,15 +32,15 @@ function destroy() {
 
 }
 async function create() {
-  async function recreateDriverTable(){
-    const database = await Driver.sync({ force: true });
-    console.log("The table for the Driver model was just (re)created!");
-    return database
-  }
-  recreateDriverTable().then(() => {
-    const firstDriver = Driver.create({ userId: "ert23", lattitude: "6758" });
-    console.log('ert23 was saved to the database!');
-  })
+  // async function recreateDriverTable(){
+  //   const database = await Driver.sync({ force: true });
+  //   console.log("The table for the Driver model was just (re)created!");
+  //   return database
+  // }
+  // recreateDriverTable().then(() => {
+  //   const firstDriver = Driver.create({ userId: "ert23", lattitude: "6758" });
+  //   console.log('ert23 was saved to the database!');
+  // })
 
 
   // const firstPassenger = Passenger.create({ userId: "asd67", lattitude: "675" });
@@ -49,9 +49,15 @@ async function create() {
 
 
 }
+async function recreate() {
 
-create();
+  const database = await Driver.sync({ force: true });
+  console.log("The table for the User model was just (re)created!");
+  return database
+}
+
+// recreate();
 
 module.exports = {
-  index
+  index, recreate
 }

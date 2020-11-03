@@ -27,14 +27,39 @@ const Message = require("./src/models/messages.js");
 const init = async () => {
   const server = new Hapi.Server({ port: 3000,  host: 'localhost'});
 // Performs the index function from Controller on a User model
-//   server.route({
-//     method: 'GET',
-//     path: '/users',
-//     handler: (request, h) => {
-//         const users = usersController.index();
+  // usersController.syncAll(sequelize)
+  server.route({
+    method: 'GET',
+    path: '/users',
+    handler: (request, h) => {
+        const users = usersController.index();
+
+        return users;
+    }
+});
+
+server.route({
+  method: 'POST',
+  path: '/users',
+  handler: (request, h) => {
+     // console.log("payload", JSON.parse(request.payload));
+     // console.log("payload", JSON.parse(request.payload));
+
+      const payload = JSON.parse(request.payload);
+      const user = payload.user;
+
+      return usersController.create(user);
+  }
+});
+
+// server.route({
+//   method: 'POST',
+//   path: '/users',
+//   handler: (request, h) => {
+//       const user = request.payload.user;
 //
-//         return users;
-//     }
+//       return usersController.create(user);
+//   }
 // });
 
 // Performs the index function from Controller on a Driver model

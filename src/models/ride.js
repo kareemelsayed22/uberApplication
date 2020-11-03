@@ -21,6 +21,14 @@ const Ride = sequelize.define('Ride', {
   fromLongitude: {
     type: DataTypes.STRING,
 
+  },
+  toLattitude: {
+    type: DataTypes.STRING,
+
+  },
+  toLongitude: {
+    type: DataTypes.STRING,
+
   }
 }, {
   // Other model options go here
