@@ -1,4 +1,5 @@
 //jshint esversion:6
+//
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require("../../db.js")
 
