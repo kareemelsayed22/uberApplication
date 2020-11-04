@@ -6,16 +6,12 @@ function update(){
 
 }
 
-function index(){
-  const rideIds = [11, 22, 33, 44, 55, 66, 77, 88, 99, 14];
+const index = async (message) => {
+    const messages = await Message.findAll();
+    console.log(messages.every(message => message instanceof Message)); // true
+    console.log("All messages:", JSON.stringify(messages, null, 2));
+    return messages
 
- const newMessages = [];
-  for (let i = 0; i < 10; i++) {
-    const newMessage = new Message(rideIds[i]);
-    newMessages.push(newMessage);
-  }
-
-  return newMessages;
 }
 
 function show(rideId) {
@@ -31,7 +27,15 @@ function update() {
 function destroy() {
 
 }
-async function create() {
+const create = (message) => {
+    const postMessage = Message.create({ rideId: message.rideId, body: message.body });
+    return postMessage.then((postMessage) => {
+        console.log('postMessage', postMessage)
+        return postMessage
+    })
+
+}
+// async function create() {
   // async function recreateMessageTable(){
   //   const database = await Message.sync({ force: true });
   //   console.log("The table for the Message model was just (re)created!");
@@ -48,16 +52,16 @@ async function create() {
 
 
 
-}
+// }
 async function recreate() {
 
   const database = await Message.sync({ force: true });
-  console.log("The table for the User model was just (re)created!");
+  console.log("The table for the Message model was just (re)created!");
   return database
 }
 
 // recreate();
 
 module.exports = {
-  index, recreate
+  index, recreate, create
 }

@@ -6,16 +6,12 @@ function update(){
 
 }
 
-function index(){
-  const userIds = ["id1", "id2", "id3", "id4", "id5", "id6", "id7", "id8", "id9", "id10"];
+const index = async (passenger) => {
+    const passengers = await Passenger.findAll();
+    console.log(passengers.every(passenger => passenger instanceof Passenger)); // true
+    console.log("All passengers:", JSON.stringify(passengers, null, 2));
+    return passengers
 
- const newPassengers = [];
-  for (let i = 0; i < 10; i++) {
-    const newPassenger = new Passenger(userIds[i]);
-    newPassengers.push(newPassenger);
-  }
-
-  return newPassengers;
 }
 
 function show(userId) {
@@ -31,7 +27,15 @@ function update() {
 function destroy() {
 
 }
-async function create() {
+const create = (passenger) => {
+    const postPassenger = Passenger.create({ userId: passenger.userId, lattitude: passenger.lattitude });
+    return postPassenger.then((postPassenger) => {
+        console.log('postPassenger', postPassenger)
+        return postPassenger
+    })
+
+}
+// async function create() {
   // async function recreatePassengerTable(){
   //   const database = await Passenger.sync({ force: true });
   //   console.log("The table for the Passenger model was just (re)created!");
@@ -48,16 +52,16 @@ async function create() {
 
 
 
-}
+// }
 async function recreate() {
 
   const database = await Passenger.sync({ force: true });
-  console.log("The table for the User model was just (re)created!");
+  console.log("The table for the Passenger model was just (re)created!");
   return database
 }
 
 // recreate();
 
 module.exports = {
-  index, recreate
+  index, recreate, create
 }

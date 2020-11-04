@@ -52,63 +52,53 @@ server.route({
   }
 });
 
-// server.route({
-//   method: 'POST',
-//   path: '/users',
-//   handler: (request, h) => {
-//       const user = request.payload.user;
-//
-//       return usersController.create(user);
-//   }
-// });
+server.route({
+  method: 'GET',
+  path: '/rides',
+  handler: (request, h) => {
+      const rides = ridesController.index();
 
-// Performs the index function from Controller on a Driver model
-//   server.route({
-//     method: 'GET',
-//     path: '/drivers',
-//     handler: (request, h) => {
-//         const drivers = driversController.index();
-//
-//         return drivers;
-//     }
-// });
-//
-// // Performs the index function from Controller on a Message model
-// server.route({
-//   method: 'GET',
-//   path: '/messages',
-//   handler: (request, h) => {
-//       const messages = messagesController.index();
-//
-//       return messages;
-//   }
-// });
+      return users;
+  }
+});
 
+server.route({
+  method: 'POST',
+  path: '/rides',
+  handler: (request, h) => {
+     // console.log("payload", JSON.parse(request.payload));
+     // console.log("payload", JSON.parse(request.payload));
 
-// Performs the index function from Controller on a Ride model
-// server.route({
-//   method: 'GET',
-//   path: '/rides',
-//   handler: (request, h) => {
-//       const rides = ridesController.index();
-//
-//       return rides;
-//   }
-// });
+      const payload = JSON.parse(request.payload);
+      const ride = payload.ride;
 
+      return ridesController.create(ride);
+  }
+});
 
-// Performs the index function from Controller on a Review model
-// server.route({
-//   method: 'GET',
-//   path: '/reviews',
-//   handler: (request, h) => {
-//       const reviews = reviewsController.index();
-//
-//       return reviews;
-//   }
-// });
+server.route({
+  method: 'GET',
+  path: '/reviews',
+  handler: (request, h) => {
+      const reviews = reviewsController.index();
 
-// Performs the index function from Controller on a Review model
+      return reviews;
+  }
+});
+
+server.route({
+  method: 'POST',
+  path: '/reviews',
+  handler: (request, h) => {
+     // console.log("payload", JSON.parse(request.payload));
+     // console.log("payload", JSON.parse(request.payload));
+
+      const payload = JSON.parse(request.payload);
+      const review = payload.review;
+
+      return reviewsController.create(review);
+  }
+});
 server.route({
   method: 'GET',
   path: '/passengers',
@@ -116,6 +106,70 @@ server.route({
       const passengers = passengersController.index();
 
       return passengers;
+  }
+});
+
+server.route({
+  method: 'POST',
+  path: '/passengers',
+  handler: (request, h) => {
+     // console.log("payload", JSON.parse(request.payload));
+     // console.log("payload", JSON.parse(request.payload));
+
+      const payload = JSON.parse(request.payload);
+      const passenger = payload.passenger;
+
+      return passengersController.create(passenger);
+  }
+});
+
+
+server.route({
+  method: 'GET',
+  path: '/messages',
+  handler: (request, h) => {
+      const messages = messagesController.index();
+
+      return messages;
+  }
+});
+
+server.route({
+  method: 'POST',
+  path: '/messages',
+  handler: (request, h) => {
+     // console.log("payload", JSON.parse(request.payload));
+     // console.log("payload", JSON.parse(request.payload));
+
+      const payload = JSON.parse(request.payload);
+      const message = payload.message;
+
+      return messagesController.create(message);
+  }
+});
+
+
+server.route({
+  method: 'GET',
+  path: '/drivers',
+  handler: (request, h) => {
+      const drivers = driversController.index();
+
+      return drivers;
+  }
+});
+
+server.route({
+  method: 'POST',
+  path: '/drivers',
+  handler: (request, h) => {
+     // console.log("payload", JSON.parse(request.payload));
+     // console.log("payload", JSON.parse(request.payload));
+
+      const payload = JSON.parse(request.payload);
+      const driver = payload.driver;
+
+      return driversController.create(driver);
   }
 });
 

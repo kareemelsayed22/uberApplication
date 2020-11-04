@@ -6,16 +6,12 @@ function update(){
 
 }
 
-function index(){
-  const userIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const index = async (driver) => {
+    const drivers = await Driver.findAll();
+    console.log(drivers.every(driver => driver instanceof Driver)); // true
+    console.log("All drivers:", JSON.stringify(drivers, null, 2));
+    return drivers
 
- const newDrivers = [];
-  for (let i = 0; i < 10; i++) {
-    const newDriver = new Driver(userIds[i]);
-    newDrivers.push(newDriver);
-  }
-
-  return newDrivers;
 }
 
 function show(userId) {
@@ -31,33 +27,24 @@ function update() {
 function destroy() {
 
 }
-async function create() {
-  // async function recreateDriverTable(){
-  //   const database = await Driver.sync({ force: true });
-  //   console.log("The table for the Driver model was just (re)created!");
-  //   return database
-  // }
-  // recreateDriverTable().then(() => {
-  //   const firstDriver = Driver.create({ userId: "ert23", lattitude: "6758" });
-  //   console.log('ert23 was saved to the database!');
-  // })
-
-
-  // const firstPassenger = Passenger.create({ userId: "asd67", lattitude: "675" });
-  // console.log('asd67 was saved to the database!');
-
-
+const create = (driver) => {
+    const postDriver = Driver.create({ userId: driver.userId, lattitude: driver.lattitude });
+    return postDriver.then((postDriver) => {
+        console.log('postDriver', postDriver)
+        return postDriver
+    })
 
 }
+
 async function recreate() {
 
   const database = await Driver.sync({ force: true });
-  console.log("The table for the User model was just (re)created!");
+  console.log("The table for the Driver model was just (re)created!");
   return database
 }
 
 // recreate();
 
 module.exports = {
-  index, recreate
+  index, recreate, create
 }

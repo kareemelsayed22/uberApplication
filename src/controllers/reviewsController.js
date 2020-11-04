@@ -6,16 +6,12 @@ function update(){
 
 }
 
-function index(){
-  const rideIds = [81, 82, 83, 84, 85, 86, 87, 88, 89, 94];
+const index = async (review) => {
+    const reviews = await Review.findAll();
+    console.log(reviews.every(review => review instanceof Review)); // true
+    console.log("All reviews:", JSON.stringify(reviews, null, 2));
+    return reviews
 
- const newReviews = [];
-  for (let i = 0; i < 10; i++) {
-    const newReview = new Review(rideIds[i]);
-    newReviews.push(newReview);
-  }
-
-  return newReviews;
 }
 
 function show(rideId) {
@@ -31,7 +27,15 @@ function update() {
 function destroy() {
 
 }
-async function create() {
+const create = (review) => {
+    const postReview = Review.create({ rideId: review.rideId, star: review.star });
+    return postReview.then((postReview) => {
+        console.log('postReview', postReview)
+        return postReview
+    })
+
+}
+// async function create() {
   // async function recreateReviewTable(){
   //   const database = await Review.sync({ force: true });
   //   console.log("The table for the Review model was just (re)created!");
@@ -48,16 +52,16 @@ async function create() {
 
 
 
-}
+// }
 async function recreate() {
 
   const database = await Review.sync({ force: true });
-  console.log("The table for the User model was just (re)created!");
+  console.log("The table for the Review model was just (re)created!");
   return database
 }
 
 // recreate();
 
 module.exports = {
-  index, recreate
+  index, recreate, create
 }
