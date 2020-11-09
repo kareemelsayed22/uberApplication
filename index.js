@@ -46,9 +46,18 @@ server.route({
      // console.log("payload", JSON.parse(request.payload));
 
       const payload = JSON.parse(request.payload);
-      const user = payload.user;
+      const username = payload.username;
+      const password = payload.password;
+      console.log('payload', payload);
 
-      return usersController.create(user);
+
+      return usersController.create(
+        {
+          username,
+          password
+        }
+      )
+      
   }
 });
 
