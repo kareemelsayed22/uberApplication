@@ -7,12 +7,12 @@ const Ride = sequelize.define('Ride', {
   // Model attributes are defined here
   driverId: {
     type: DataTypes.STRING,
-    allowNull: false
+    //allowNull: false
   },
   passengerId: {
     type: DataTypes.STRING,
     // allowNull defaults to true
-    allowNull: false
+    //allowNull: false
   },
   fromLattitude: {
     type: DataTypes.STRING,

@@ -57,7 +57,7 @@ server.route({
           password
         }
       )
-      
+
   }
 });
 
@@ -67,7 +67,7 @@ server.route({
   handler: (request, h) => {
       const rides = ridesController.index();
 
-      return users;
+      return rides;
   }
 });
 
